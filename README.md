@@ -48,9 +48,9 @@ Install Appium http://appium.io/ for mobile tests
 -Install Brew if you don't already have it.
 -Run `brew install node` to be sure you have node installed.
 
--Run `brew install appium`
-
 -Run `brew install carthage`
+
+-Run `npm install -g appium` NOTE: DO NOT install via Brew, the paths will conflict.
 
 -Run `npm install -g appium-webdriveragent`
 
@@ -63,13 +63,15 @@ Install chocolatey from here: https://chocolatey.org/install
 
 -Run `choco install nodejs`
 
--Run `choco install appium`
+-Run `npm install -g appium` NOTE: DO NOT install via Chocolatey, the paths will conflict.
 
 -Run `choco install python --version=3.9.0`
 
+
 **Everyone**
 ---
--Be sure to have Simulators installed in XCode. 
+-Be sure to have simulator platform versions installed in Xcode. To do this, open Xcode and go to 
+***Xcode > Preferences > Components*** and install the Simulator platforms you intend to use. The Default that the appium service will try to use from the code here is **14.3**
 
 -Install The Python Community Edition Plugin for IntelliJ https://plugins.jetbrains.com/plugin/7322-python-community-edition
 
@@ -77,13 +79,13 @@ Install chocolatey from here: https://chocolatey.org/install
 
 -I built this project to be able to run using pytest runners https://docs.pytest.org
 -You can run tests by
-inputting `pytest --environment="{test, uat, dev}" -s tests/{your directory path} --html=test-reports/runreport.html` into the command
+inputting `pytest --environment="{test, dev}" -s tests/{your directory path} --html=test-reports/runreport.html` into the command
 line or, Using IntelliJ's pytest runner, you can run tests. Find the runner under /tests.
 
 -Note that the test runner is configured to run using the Python interpreter of the project, so you will need to define
 your python interpreter for your project, or change the runner to refer to another interpreter.
 
--You must define an *environment* variable when running like `--environment='test' or --environment='uat'`
+-You must define an *environment* variable when running like `--environment='test' or --environment='dev'`
 
 -Optionally, you can define an *headless* variable when running like `--headless='true' or --headless='false'`
 
