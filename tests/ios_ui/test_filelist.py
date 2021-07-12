@@ -1,4 +1,5 @@
 """Created December 15th, 2020 by Alysha Kester-Terry """
+import logging
 
 from ios_objects import ios_pages
 from setup_helpers import driver_setup
@@ -22,14 +23,14 @@ def test_filelist(is_headless, record_xml_attribute):
     try:
         member_list_page.wait_for_load_complete()
         assert member_list_page.member_list_title_exists()
-        print('The page title is: ' + member_list_page.get_member_list_title())
+        logging.info(msg='The page title is: ' + member_list_page.get_member_list_title())
         member_list_page.tap_member_name('Alysha')
         member_detail_page.wait_for_load_complete()
         assert member_detail_page.member_bio_exists()
-        print('The Bio exists and says: {}'.format(member_detail_page.get_member_bio()))
+        logging.info(msg='The Bio exists and says: {}'.format(member_detail_page.get_member_bio()))
     except (Exception, BaseException) as failure:
         # If any assertions above fail, then mark the test as failed and capture a screenshot
-        print('!!!!! The test failed. {}'.format(failure))
+        logging.info(msg='!!!!! The test failed. {}'.format(failure))
         failed = failure
         base_page.process_failure(failed)
     finally:

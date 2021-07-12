@@ -11,6 +11,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from ios_objects import ios_page_locators
 from setup_helpers import driver_setup
 from tests import conftest
+import logging
 
 created_date = str(datetime.datetime.utcnow().strftime("%m-%d-%H%M"))
 file_name = 'test-reports/screenshots/ios/' + created_date
@@ -50,39 +51,39 @@ class BasePage(object):
 
     def wait_for_element(self, element):
         try:
-            print('Waiting for element...')
+            logging.debug(msg='Waiting for element...')
             WebDriverWait(driver=self.driver,
                           timeout=default_wait,
                           poll_frequency=2).until(
                 expected_conditions.visibility_of(element))
-            print('The element is found? {}'.format(element.is_displayed()))
+            logging.debug(msg='The element is found? {}'.format(element.is_displayed()))
         except NoSuchElementException as n:
-            print('Element was not found: {}'.format(element), n)
+            logging.debug(msg='Element was not found: {}'.format(element))
         exists = self.element_exists(element)
-        print('The element exists? {}'.format(exists))
+        logging.debug(msg='The element exists? {}'.format(exists))
         assert exists
 
     def wait_for_invisibility(self, element):
-        print('Waiting for invisibility of element...')
+        logging.debug(msg='Waiting for invisibility of element...')
         WebDriverWait(driver=self.driver,
                       timeout=default_wait,
                       poll_frequency=2).until(
             expected_conditions.invisibility_of_element(element))
         exists = self.element_exists(element)
-        print('The element exists? {}'.format(exists))
+        logging.debug(msg='The element exists? {}'.format(exists))
         assert exists is False
 
     def element_exists(self, element):
         return element.is_displayed()
 
     def swipe_up(self):
-        print('Trying to swipe up!')
+        logging.debug(msg='Trying to swipe up!')
         actions = TouchAction(self.driver)
         actions.long_press(x=180, y=510).move_to(x=150, y=250).release().perform()
 
     def get_page_src_info(self):
         source_hierarchy = self.driver.page_source
-        print(source_hierarchy)
+        logging.debug(msg=source_hierarchy)
 
     def process_failure(self, error):
         self.get_page_src_info()
@@ -105,9 +106,9 @@ class IosMemberListPage(BasePage):
         title = self.member_list_title_exists()
         self.take_screenshot('MemberListScreen')
         while title is False:
-            print('List page is initiated? {}'.format(title) + ' waiting...')
+            logging.debug(msg='List page is initiated? {}'.format(title) + ' waiting...')
             self.wait_for_seconds(1)
-        print('is page is initiated? {}'.format(title))
+        logging.debug(msg='is page is initiated? {}'.format(title))
 
     def member_list_title_exists(self):
         element = ios_page_locators.IosMemberListPageLocators.member_list_page_title(self)
@@ -122,7 +123,7 @@ class IosMemberListPage(BasePage):
         for member_element in member_element_list:
             this_member = self.get_element_text(member_element).lower()
             if member_name.lower() in this_member:
-                print('Found member: {}'.format(this_member))
+                logging.info(msg='Found member: {}'.format(this_member))
                 self.tap_element(member_element)
                 break
 
@@ -132,7 +133,7 @@ class IosMemberDetailPage(BasePage):
 
     def wait_for_load_complete(self):
         initiated = self.member_bio_exists()
-        print('Member detail page is initiated? {}'.format(initiated))
+        logging.debug(msg='Member detail page is initiated? {}'.format(initiated))
         self.take_screenshot('MemberDetailScreen')
 
     def member_picture_exists(self):

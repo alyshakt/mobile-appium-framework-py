@@ -1,5 +1,7 @@
 import time
 
+import logging
+
 
 def pytest_addoption(parser):
     """Defines arguments that can be passed in"""
@@ -16,11 +18,11 @@ def pytest_addoption(parser):
 def pytest_generate_tests(metafunc):
     """Use of the arguments"""
     if 'environment' in metafunc.fixturenames:
-        print('\n-----The environment: {}'.format(metafunc.config.option.environment))
+        logging.info(msg='\n-----The environment: {}'.format(metafunc.config.option.environment))
         metafunc.parametrize("environment",
                              [str(metafunc.config.option.environment)])
     if 'is_headless' in metafunc.fixturenames:
-        print('\n-----Running headless? {}'.format(metafunc.config.option.is_headless))
+        logging.info(msg='\n-----Running headless? {}'.format(metafunc.config.option.is_headless))
         metafunc.parametrize("is_headless",
                              [str(metafunc.config.option.is_headless)])
 

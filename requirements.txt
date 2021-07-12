@@ -1,7 +1,8 @@
 nodejs
-datetime~=4.3
-pytest~=6.0.1
-Appium-Python-Client~=1.0.2
+datetime
+pytest
+Appium-Python-Client
 Pillow
 pybase64
-selenium~=3.141.0
+selenium
+logging
