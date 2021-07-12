@@ -50,9 +50,12 @@ Install Appium http://appium.io/ for mobile tests
 
 -Run `brew install appium`
 
--Run `npm install carthage`
+-Run `brew install carthage`
+
+-Run `npm install -g appium-webdriveragent`
 
 -Run `npm install appium-doctor -g` ... to check specific requirement setup for ios or android, Run `appium-doctor --ios` or `appium-doctor --android`
+
 
 **Windows**
 ---
