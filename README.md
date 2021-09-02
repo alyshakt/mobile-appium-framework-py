@@ -16,7 +16,9 @@ Community edition
 ```
 3 Make sure Library folder permissions are set to Read & Write for everyone on the machine, and that you've applied the permissions to all enclosed items.
 
-4 Install pip
+4 Install Pyton  & Install pip
+```brew install python```
+
 ```
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 ```
