@@ -1,4 +1,4 @@
-# scriptcycle-test-client Test Project
+# Mobile Test Project
 
 A Python based test client for web UI and backend testing.
 
