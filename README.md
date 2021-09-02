@@ -10,6 +10,11 @@ Community edition
 **MacOS**
 ---
 1 Disable SIP if you haven't already.
+How to open Terminal on Mac
+The Terminal app is in the Utilities folder in Applications. To open it, either open your Applications folder, then open Utilities and double-click on Terminal, or press Command - spacebar to launch Spotlight and type "Terminal," then double-click the search result.
+
+You’ll see a small window with a white background open on your desktop. In the title bar are your username, the word "bash" and the dimensions of the window in pixels. Bash stands for "Bourne again shell". There are a number of different shells that can run Unix commands, and on the Mac Bash is the one used by Terminal.
+
 2 Install Homebrew
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
