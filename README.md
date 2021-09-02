@@ -10,6 +10,7 @@ Community edition
 **MacOS**
 ---
 1 Disable SIP if you haven't already.
+
 How to open Terminal on Mac
 The Terminal app is in the Utilities folder in Applications. To open it, either open your Applications folder, then open Utilities and double-click on Terminal, or press Command - spacebar to launch Spotlight and type "Terminal," then double-click the search result.
 
