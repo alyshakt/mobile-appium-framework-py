@@ -9,12 +9,13 @@ Community edition
 
 **MacOS**
 ---
-1 Disable SIP if you haven't already.
 
 How to open Terminal on Mac
 The Terminal app is in the Utilities folder in Applications. To open it, either open your Applications folder, then open Utilities and double-click on Terminal, or press Command - spacebar to launch Spotlight and type "Terminal," then double-click the search result.
 
 You’ll see a small window with a white background open on your desktop. In the title bar are your username, the word "bash" and the dimensions of the window in pixels. Bash stands for "Bourne again shell". There are a number of different shells that can run Unix commands, and on the Mac Bash is the one used by Terminal.
+
+1 You may need to disable SIP on a Mac: https://www.macworld.co.uk/how-to/how-turn-off-mac-os-x-system-integrity-protection-rootless-3638975/
 
 2 Install Homebrew
 ```
@@ -38,27 +39,21 @@ python get-pip.py
 pip install -U pytest --ignore-installed
 ```
 
-6 Install all other requirements
+6 Install all other requirements-- Open this project in IntelliJ. Use the "Run Anything" terminal to run:
 ```
 pip install -r requirements.txt
 ```
 
-Install Appium http://appium.io/ for mobile tests
+7 Install Appium Desktop to allow for inspection of mobile UI components: https://github.com/appium/appium-desktop/releases/tag/v1.21.0
+ a) XCode is required https://apps.apple.com/us/app/xcode/id497799835?mt=12 | Run `sudo xcode-select --install` in a terminal
+ b) Android Studio and Devices setup: * https://developer.android.com/studio *https://developer.android.com/studio/run/managing-avds
 
--XCode is required https://apps.apple.com/us/app/xcode/id497799835?mt=12
-
--Run `sudo xcode-select --install` in a terminal
-
--Android Studio and Devices setup
-* https://developer.android.com/studio
-* https://developer.android.com/studio/run/managing-avds
-
--Install Brew if you don't already have it.
+8 Install Brew if you don't already have it.
 -Run `brew install node` to be sure you have node installed.
 
 -Run `brew install carthage`
 
--Run `npm install -g appium` NOTE: DO NOT install via Brew, the paths will conflict.
+-Run `npm install -g appium` *NOTE: DO NOT install via Brew, the paths will conflict.*
 
 -Run `npm install -g appium-webdriveragent`
 
