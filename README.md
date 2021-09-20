@@ -15,12 +15,26 @@ The Terminal app is in the Utilities folder in Applications. To open it, either 
 
 You’ll see a small window with a white background open on your desktop. In the title bar are your username, the word "bash" and the dimensions of the window in pixels. Bash stands for "Bourne again shell". There are a number of different shells that can run Unix commands, and on the Mac Bash is the one used by Terminal.
 
+
 1 You may need to disable SIP on a Mac: https://www.macworld.co.uk/how-to/how-turn-off-mac-os-x-system-integrity-protection-rootless-3638975/
 
-2 Install Homebrew
+2A Install Homebrew
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
+
+-Run `brew install node` to be sure you have node installed.
+
+-Run `brew install carthage`
+
+2B Install NPM Components
+
+-Run `npm install -g appium` *NOTE: DO NOT install via Brew, the paths will conflict.* *Appium Requires XCode so install it from the App Store Now*
+
+-Run `npm install -g appium-webdriveragent`
+
+-Run `npm install appium-doctor -g` ... to check specific requirement setup for ios or android, Run `appium-doctor --ios` or `appium-doctor --android`
+
 3 Make sure Library folder permissions are set to Read & Write for everyone on the machine, and that you've applied the permissions to all enclosed items.
 
 4 Install Pyton  & Install pip
@@ -47,18 +61,6 @@ pip install -r requirements.txt
 7 Install Appium Desktop to allow for inspection of mobile UI components: https://github.com/appium/appium-desktop/releases/tag/v1.21.0
  a) XCode is required https://apps.apple.com/us/app/xcode/id497799835?mt=12 | Run `sudo xcode-select --install` in a terminal
  b) Android Studio and Devices setup: * https://developer.android.com/studio *https://developer.android.com/studio/run/managing-avds
-
-8 Install Brew if you don't already have it.
--Run `brew install node` to be sure you have node installed.
-
--Run `brew install carthage`
-
--Run `npm install -g appium` *NOTE: DO NOT install via Brew, the paths will conflict.*
-
--Run `npm install -g appium-webdriveragent`
-
--Run `npm install appium-doctor -g` ... to check specific requirement setup for ios or android, Run `appium-doctor --ios` or `appium-doctor --android`
-
 
 **Windows**
 ---
