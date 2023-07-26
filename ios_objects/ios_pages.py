@@ -1,6 +1,7 @@
 """Created December 15th, 2020 by Alysha Kester-Terry """
 
 import datetime
+import logging
 
 import pytest
 from appium.webdriver.common.touch_action import TouchAction
@@ -11,7 +12,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from ios_objects import ios_page_locators
 from setup_helpers import driver_setup
 from tests import conftest
-import logging
 
 created_date = str(datetime.datetime.utcnow().strftime("%m-%d-%H%M"))
 file_name = 'test-reports/screenshots/ios/' + created_date

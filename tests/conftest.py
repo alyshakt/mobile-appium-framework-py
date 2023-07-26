@@ -1,6 +1,5 @@
-import time
-
 import logging
+import time
 
 
 def pytest_addoption(parser):
@@ -30,6 +29,15 @@ def pytest_generate_tests(metafunc):
 def max_sleep(seconds_to_wait=30):
     """Sleep for seconds"""
     time.sleep(seconds_to_wait)
+
+
+def get_timeout_timestamp(seconds_to_wait: int = None):
+    """ time.perf_counter() returns the current elapsed time of execution including sleep.
+    Method returns timeout based on current execution elapsed time."""
+    if seconds_to_wait is None:
+        seconds_to_wait = max_wait_time_seconds()
+    total_wait = time.perf_counter() + seconds_to_wait
+    return total_wait
 
 
 def max_wait_time_seconds(seconds_to_wait=30):

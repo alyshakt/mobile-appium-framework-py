@@ -1,0 +1,14 @@
+{
+  "capabilities": {
+    "firstMatch": [
+      {}
+    ],
+    "alwaysMatch": {
+      "platformName": "iOS",
+      "appium:deviceName": "iPhone 14",
+      "appium:automationName": "XCUITest",
+      "appium:platformVersion": "16.4",
+      "appium:app": "/Users/alyshakt/Library/Developer/Xcode/DerivedData/hwsproject1-dicytxpmegmelobpeiychaiiomvp/Build/Products/Debug-iphonesimulator/hwsproject1.app"
+    }
+  }
+}
