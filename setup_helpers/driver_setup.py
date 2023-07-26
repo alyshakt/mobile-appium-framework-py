@@ -1,13 +1,16 @@
 """To set up the appium driver by Platform Type"""
 import logging
-
-"""Created December 15th, 2020 by Alysha Kester-Terry """
 import os
 
 from appium import webdriver
 from appium.webdriver.appium_service import AppiumService
 
+from tests import conftest
+
 appium_service = AppiumService()
+node = '/usr/local/bin/node'
+npm = '/usr/local/bin/npm'
+main_script = '/usr/local/lib/node_modules/appium/build/lib/main.js'
 
 
 def get_app_type(PlatformType):
@@ -20,7 +23,9 @@ def get_app_type(PlatformType):
     return app_type
 
 
-def get_desired_caps(PlatformType, is_headless=False, app_path=None, device_name='iPhone 11', platform_version='14.3'):
+def get_desired_caps(PlatformType, is_headless=False,
+                     app_path=None,
+                     device_name='iPhone 14', platform_version='16.4'):
     """To Define the desired capabilities type for your app
     :param platform_version:
     :param PlatformType: iOS or Android
@@ -30,29 +35,17 @@ def get_desired_caps(PlatformType, is_headless=False, app_path=None, device_name
     """
     platform_type = get_app_type(PlatformType)
     lower_app_type = platform_type.lower()
+    desired_caps = None
     if app_path is None:
         app_path = get_app_path(PlatformType)
         logging.info(msg='\nThe App Path we found: {}'.format(app_path))
-    desired_caps = None
     if lower_app_type == 'ios':
-        if platform_version is None:
-            platform_version='14.3'
-        if device_name is None:
-            device_name='iPhone 11'
         desired_caps = dict(
             platformName='iOS',
-            platformVersion=platform_version,
             deviceName=device_name,
             automationName='XCUITest',
-            sendKeyStrategy='grouped',
-            app=app_path,
-            elementResponseAttributes=True,
-            isAutomationEnabled=True,
-            autoAcceptAlerts=False,
-            autoDismissAlerts=False,
-            connectHardwareKeyboard=True,
-            isHeadless=bool(is_headless),
-            showXcodeLog=True
+            platformVersion=platform_version,
+            app=app_path
         )
     elif lower_app_type == 'android':
         if device_name is None:
@@ -75,20 +68,26 @@ def get_desired_caps(PlatformType, is_headless=False, app_path=None, device_name
 
 
 def __start_service():
-    appium_service.start()
-    logging.info(msg='Appium is running? {}'.format(appium_service.is_running))
-    logging.info(msg='Appium is listening? {}'.format(appium_service.is_listening))
+    try:
+        appium_service.stop()
+        conftest.max_sleep(3)
+        appium_service.start(node=node, npm=npm, main_script=main_script, stdout=True)
+        logging.info(msg='start_service Appium is running? {}'.format(appium_service.is_running))
+        logging.info(msg='start_service Appium is listening? {}'.format(appium_service.is_listening))
+    except (BaseException, Exception) as start_error:
+        logging.warning(msg=f'Error: {start_error} \n Retrying....')
+        appium_service.stop()
+        appium_service.start(node=node, npm=npm, main_script=main_script)
+        conftest.max_sleep(3)
+        logging.info(msg='start_service retry Appium is running? {}'.format(appium_service.is_running))
+        logging.info(msg='start_service retry Appium is listening? {}'.format(appium_service.is_listening))
 
 
 def get_driver(desired_caps):
-    running = appium_service.is_running
-    listening = appium_service.is_listening
-    logging.info(msg='Appium is running? {}'.format(running))
-    logging.info(msg='Appium is listening? {}'.format(listening))
-    if running or listening is False:
-        __start_service()
-    driver = webdriver.Remote(command_executor='http://127.0.0.1:4723/wd/hub',
-                              desired_capabilities=desired_caps)
+    __start_service()
+
+    driver = webdriver.Remote(command_executor='http://127.0.0.1:4723', desired_capabilities=desired_caps)
+    print(driver.session.items())
     return driver
 
 
@@ -118,5 +117,5 @@ def get_app_path(PlatformType):
 
 def tear_down():
     appium_service.stop()
-    logging.info(msg='Appium is running? {}'.format(appium_service.is_running))
-    logging.info(msg='Appium is listening? {}'.format(appium_service.is_listening))
+    logging.info(msg='tear_down Appium is running? {}'.format(appium_service.is_running))
+    logging.info(msg='tear_down Appium is listening? {}'.format(appium_service.is_listening))
