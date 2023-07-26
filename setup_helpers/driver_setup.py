@@ -23,7 +23,7 @@ def get_app_type(PlatformType):
     return app_type
 
 
-def get_desired_caps(PlatformType, is_headless=False,
+def get_desired_caps(PlatformType, is_headless=True,
                      app_path=None,
                      device_name='iPhone 14', platform_version='16.4'):
     """To Define the desired capabilities type for your app
@@ -45,7 +45,8 @@ def get_desired_caps(PlatformType, is_headless=False,
             deviceName=device_name,
             automationName='XCUITest',
             platformVersion=platform_version,
-            app=app_path
+            app=app_path,
+            isHeadless=bool(is_headless)
         )
     elif lower_app_type == 'android':
         if device_name is None:
